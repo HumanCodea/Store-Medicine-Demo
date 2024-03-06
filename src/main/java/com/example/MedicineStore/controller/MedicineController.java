@@ -80,4 +80,15 @@ public class MedicineController {
         return "redirect:/my_medicine";
     }
 
+    @GetMapping("/search_medicine")
+    public String SearchMedicine(@Param("nameMedicine") String nameMedicine, Model model){
+        List<Medicine> list = medicineService.getAllMedicine();
+        if(nameMedicine != null){
+            list = medicineService.findMedicineByName(nameMedicine);
+            model.addAttribute("nameMedicine", nameMedicine);
+        }
+        model.addAttribute("medicine", list);
+        return "searchMedicine";
+    }
+
 }
